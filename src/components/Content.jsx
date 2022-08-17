@@ -8,14 +8,9 @@ const Content = ({ data }) => {
       {data.length !== 0 && (
         <>
           {data.Poster !== 'N/A' ? (
-            <img src={data.Poster} alt='' className='border w-25' />
+            <img src={data.Poster} alt='' className='h-25' />
           ) : (
-            <img
-              src={image}
-              alt=''
-              className='border
-                '
-            />
+            <img src={image} alt='' />
           )}
           <MovieDetails data={data} />
         </>
