@@ -21,12 +21,12 @@ const Header = ({ data, setResource, handleClick }) => {
 
   useEffect(() => {
     findMovies(inputValue);
-  }, [inputValue]);
+  });
 
   return (
     <header className='bg-dark container-fluid p-4 ps-5 pe-5 border-bottom border-dark border-2 '>
       <div className='d-flex justify-content-between'>
-        <h2 className='text-white'>
+        <h2 className='text-white m-0'>
           Movie <span className='text-warning'>search</span>
         </h2>
         <input
@@ -44,13 +44,17 @@ const Header = ({ data, setResource, handleClick }) => {
                   <>
                     <div
                       onClick={() => handleClick(items.imdbID)}
-                      className='list-unstyled text-light d-flex h-25 mb-4 ps-2  border-bottom'
+                      className='list-unstyled text-light d-flex h-25 border-bottom'
                       key={items.imdbID}
                     >
                       {items.Poster === 'N/A' ? (
-                        <img src={image} alt='movie' className='h-50' />
+                        <img
+                          src={image}
+                          alt='movie'
+                          className='h-50 w-25 mt-3'
+                        />
                       ) : (
-                        <img src={items.Poster} alt='' className='h-100' />
+                        <img src={items.Poster} alt='' className='h-100 w-25' />
                       )}
                       <div className='d-flex flex-column'>
                         <p href className='ps-2 p-0 m-0 title'>
