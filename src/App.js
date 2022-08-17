@@ -3,10 +3,9 @@ import axios from 'axios';
 import Content from './components/Content';
 import Header from './components/Header';
 
-const BASE_URL = 'https://www.omdbapi.com/?apikey=83813a57&';
-
 function App() {
   const [data, setData] = useState([]);
+  const [resource, setResource] = useState('');
   const [foundData, setFoundData] = useState({
     Actors: 'Rami Malek, Christian Slater, Carly Chaikin',
     Awards: 'Won 3 Primetime Emmys. 21 wins & 85 nominations total',
@@ -38,21 +37,24 @@ function App() {
     imdbVotes: '377,887',
     totalSeasons: 'N/A',
   });
-  const [resource, setResource] = useState('');
 
-  async function findData(resource) {
+  const findData = async (resource) => {
     try {
-      const resp = await axios.get(BASE_URL + 's=' + resource);
+      const resp = await axios.get(
+        `https://www.omdbapi.com/?apikey=83813a57&s=${resource}`
+      );
       if (resp.data.Response === 'True') {
         setData(resp.data.Search);
       }
     } catch (error) {
       return false;
     }
-  }
+  };
 
   const handleClick = async (id) => {
-    const select = await axios.get(BASE_URL + 'i=' + id);
+    const select = await axios.get(
+      `https://www.omdbapi.com/?apikey=83813a57&i=${id}`
+    );
     setFoundData(select.data);
   };
 
