@@ -6,6 +6,7 @@ import Header from './components/Header';
 function App() {
   const [data, setData] = useState([]);
   const [resource, setResource] = useState('');
+  const [type, setType] = useState('movie');
   const [foundData, setFoundData] = useState({
     Actors: 'Rami Malek, Christian Slater, Carly Chaikin',
     Awards: 'Won 3 Primetime Emmys. 21 wins & 85 nominations total',
@@ -38,10 +39,10 @@ function App() {
     totalSeasons: 'N/A',
   });
 
-  const findData = async (resource) => {
+  const findData = async (resource, type) => {
     try {
       const resp = await axios.get(
-        `https://www.omdbapi.com/?apikey=83813a57&s=${resource}`
+        `https://www.omdbapi.com/?apikey=83813a57&s=${resource}&type=${type}`
       );
       if (resp.data.Response === 'True') {
         setData(resp.data.Search);
@@ -59,12 +60,17 @@ function App() {
   };
 
   useEffect(() => {
-    findData(resource);
-  }, [resource]);
+    findData(resource, type);
+  }, [resource, type]);
 
   return (
     <div className='App bg-dark bg-gradient min-vh-100'>
-      <Header data={data} setResource={setResource} handleClick={handleClick} />
+      <Header
+        data={data}
+        setResource={setResource}
+        handleClick={handleClick}
+        setType={setType}
+      />
       <Content data={foundData} />
     </div>
   );
